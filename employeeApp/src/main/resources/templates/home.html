@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+<!-- CSS only -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+	crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+	crossorigin="anonymous">
+	
+</script>
+
+<style type="text/css">
+.table {
+	align-content: center;
+	margin-top: 100px;
+}
+</style>
+
+</head>
+<body>
+
+	<div class="container">
+		<h1>Employee List</h1>
+
+		<form th:action=@{/showOneEmploye} method="post">
+			<label for="id" style="width: 10%; font-size: 20px">Employee
+				ID : </label> <input style="width: 80%;" type="number" class="" id="empName"
+				placeholder="enter Employee Id ,... eg : 1" name="empid">
+			<button style="float: right;" type="submit" class="btn btn-secondary">search</button>
+
+
+
+		</form>
+
+		<table class="table table-striped table-responsive-md" border="2px">
+
+			<thead>
+				<tr>
+					<th>Employee ID</th>
+					<th>Employee Name</th>
+					<th>Employee Age</th>
+					<th></th>
+					<th></th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="employee : ${listOfEmp}" class="trClass">
+					<td th:text="${employee.empid}">
+					<td th:text="${employee.name}">
+					<td th:text="${employee.age}">
+					<td>
+
+						<button type="button" class="btn btn-warning"
+							style="margin-left: 50px;" th:text="'Update '"></button>
+
+
+					</td>
+
+					<td><a th:href="@{/delete/{id}(id=${employee.empid})}">
+							<button type="button" class="btn btn-danger"
+								style="margin-left: 50px;" th:text="'Delete '"></button>
+					</a></td>
+			</tbody>
+		</table>
+
+
+		<a th:href="@{/addEmp}" class="btn btn-primary active"> <i
+			class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></i> Add
+			Employee
+
+		</a> <a th:href="@{/deletAll}">
+			<button type="button" class="btn btn-danger"
+				style="margin-left: 20px;">Delele All Employee</button>
+		</a>
+
+
+
+	</div>
+
+
+</body>
+</html>
